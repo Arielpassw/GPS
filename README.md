@@ -1,41 +1,54 @@
-# GeoTrack
+﻿# GeoTrack
 
-Aplicación móvil para consultar la ubicación del dispositivo, abrirla en Google Maps y planificar un recorrido hacia un destino configurado en Quito. GeoTrack está construida con Ionic y Angular, y usa Capacitor para acceder a las funciones nativas de geolocalización y almacenamiento.
+Aplicación móvil para consultar la ubicación del dispositivo, abrirla en Google Maps y planificar un recorrido hacia un destino configurado en Quito. Está desarrollada con Ionic y Angular, y utiliza Capacitor para acceder a la geolocalización y al almacenamiento nativo.
 
-## Vista previa
+## Capturas de pantalla
 
-![Vista de GeoTrack en tema claro](docs/capturas/geotrack.svg)
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <strong>Mi ubicación</strong><br /><br />
+      <img src="docs/capturas/Mi_Ubicacion.png" alt="Pantalla de ubicación GPS de GeoTrack" width="340" />
+    </td>
+    <td align="center" width="50%">
+      <strong>Planificación de ruta</strong><br /><br />
+      <img src="docs/capturas/Mi_ruta.png" alt="Pantalla de planificación de ruta de GeoTrack" width="340" />
+    </td>
+  </tr>
+  <tr>
+    <td align="center" colspan="2">
+      <strong>Guardar información</strong><br /><br />
+      <img src="docs/capturas/guardar.png" alt="Opciones para guardar ubicación y ruta" width="340" />
+    </td>
+  </tr>
+</table>
 
-La pantalla principal reúne las coordenadas actuales, accesos a Google Maps y la ruta al destino, y opciones para guardar los enlaces como archivos de texto. El botón de la esquina superior permite alternar entre tema claro y oscuro.
+## Funcionalidades
 
-## Funciones
+- Obtiene la latitud y longitud actuales mediante el GPS.
+- Abre la ubicación actual en Google Maps.
+- Traza una ruta desde la ubicación actual hasta el destino configurado (`-0.208206, -78.490448`).
+- Guarda los enlaces de ubicación y ruta como archivos TXT.
+- Ofrece tema claro y oscuro, y recuerda la preferencia elegida.
+- Puede ejecutarse en navegador o como aplicación Android mediante Capacitor.
 
-- Obtención de latitud y longitud con el GPS del dispositivo.
-- Apertura de la ubicación actual en Google Maps.
-- Consulta de una ruta desde la ubicación actual hasta el destino configurado (`-0.208206, -78.490448`).
-- Descarga de enlaces de ubicación y recorrido como archivos TXT.
-- Tema claro y oscuro, con preferencia guardada localmente.
-- Compatibilidad con navegador y compilación Android mediante Capacitor.
-
-Si no se puede obtener la ubicación, el servicio devuelve coordenadas de respaldo de Quito (`-0.2025464, -78.4941719`).
+Si no se puede obtener la ubicación, la aplicación usa como respaldo las coordenadas de Quito (`-0.2025464, -78.4941719`).
 
 ## Requisitos
 
 - Node.js y npm.
-- Android Studio y el SDK de Android si se desea ejecutar la aplicación como app Android.
+- Android Studio y Android SDK para compilar o ejecutar la aplicación Android.
 
-## Puesta en marcha web
+## Ejecutar en navegador
 
 ```bash
 npm install
 npm start
 ```
 
-Abre la dirección local que indique Angular CLI en la terminal (normalmente `http://localhost:4200`). El navegador debe permitir el acceso a la ubicación para usar el GPS real; si no se concede, se mostrarán las coordenadas de respaldo de Quito.
+Abre la dirección local que indique Angular CLI en la terminal (normalmente `http://localhost:4200`). Permite el acceso a la ubicación desde el navegador para obtener las coordenadas del dispositivo.
 
-## Android
-
-Después de instalar las dependencias, compila la aplicación web y sincronízala con el proyecto Android:
+## Ejecutar en Android
 
 ```bash
 npm install
@@ -44,7 +57,7 @@ npx cap sync android
 npx cap open android
 ```
 
-En Android Studio, selecciona un emulador o dispositivo conectado y ejecuta la app. Al usar la ubicación, concede el permiso solicitado por el sistema. Para probar el GPS en un emulador, configura una ubicación desde los controles extendidos del emulador.
+En Android Studio, selecciona un emulador o un dispositivo conectado y ejecuta la aplicación. Concede el permiso de ubicación solicitado por Android. Para probar el GPS en un emulador, configura una ubicación desde sus controles extendidos.
 
 ## Comandos disponibles
 
@@ -73,11 +86,19 @@ src/
 │   └── services/gps.ts # Geolocalización y guardado de archivos
 ├── assets/             # Recursos estáticos
 └── environments/       # Configuración por entorno
-android/                # Proyecto nativo Android de Capacitor
-docs/capturas/          # Imágenes de vista previa para este README
+android/                # Proyecto Android de Capacitor
+docs/capturas/          # Capturas incluidas en este README
 ```
+
+## Equipo
+
+**Realizado por Ariel Arias y Emilia Tana**
+
+| Integrante | Rol |
+| --- | --- |
+| Ariel Arias | Backend |
+| Emilia Tana | Frontend |
 
 ## Configuración del destino
 
-Las coordenadas del destino se definen en `src/app/home/home.page.ts`, en las propiedades `destinoLat` y `destinoLng`. Actualízalas para cambiar el lugar al que apunta la planificación de ruta.
-
+Las coordenadas del destino se definen en `src/app/home/home.page.ts`, en las propiedades `destinoLat` y `destinoLng`. Actualízalas para cambiar el destino de la ruta.
