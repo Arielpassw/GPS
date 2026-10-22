@@ -29,18 +29,18 @@
 
   <hr class="ion-margin-vertical">
 
-  <!-- 2. Sección para Ruta (Origen en tu posición para escoger destino) -->
+  <!-- 2. Sección para Ruta Completa (Origen GPS Actual + Destino Predefinido) -->
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Ruta desde mi posición</ion-card-title>
+      <ion-card-title>Ruta Completa</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <p>Abre Google Maps usando tu posición actual como punto de partida para que elijas tu destino.</p>
+      <p>Muestra el trayecto desde tu ubicación actual hacia el destino predefinido.</p>
     </ion-card-content>
   </ion-card>
 
-  <ion-button expand="block" color="secondary" (click)="abrirRutaParaEscogerDestino()">
-    Elegir Ruta (Abrir Google Maps)
+  <ion-button expand="block" color="secondary" (click)="abrirRutaCompleta()">
+    Ver Ruta Completa en Google Maps
   </ion-button>
 
   <!-- 3 y 4. Botones para guardar en TXT -->

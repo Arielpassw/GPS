@@ -36,45 +36,53 @@ export class HomePage {
   latitud: number | string = 'No obtenida aún';
   longitud: number | string = 'No obtenida aún';
 
+  // Destino predefinido (puedes cambiarlo por el de tu casa, un parque o la universidad)
+  destinoLat = -0.208206;
+  destinoLng = -78.490448;
+
   constructor(private gpsService: GpsService) {
     this.obtenerUbicacionActual();
   }
 
-  // Obtiene la ubicación y actualiza las variables en pantalla
   async obtenerUbicacionActual() {
     const pos = await this.gpsService.obtenerPosicionActual();
     this.latitud = pos.lat;
     this.longitud = pos.lng;
   }
 
-  // 1. Abre Google Maps en el teléfono centrado en la ubicación actual
+  // 1. Ver Ubicación Actual en Google Maps
   async abrirMapaUbicacion() {
     if (this.latitud === 'No obtenida aún') {
       await this.obtenerUbicacionActual();
     }
-    const url = `https://www.google.com/maps/@${this.latitud},${this.longitud},17z`;
-    window.open(url, '_blank');
+    const urlUbicacion = `https://www.google.com/maps/search/?api=1&query=${this.latitud},${this.longitud}`;
+    window.open(urlUbicacion, '_blank');
   }
 
-  // 2. Abre Google Maps usando la posición actual como origen, permitiendo elegir destino
-  async abrirRutaParaEscogerDestino() {
+  // 3. Guardar Ubicación Actual en TXT
+  async guardarUbicacionTxt() {
     if (this.latitud === 'No obtenida aún') {
       await this.obtenerUbicacionActual();
     }
-    // Si dejamos el destination vacío o usamos la sintaxis de dirección desde origen actual:
-    const urlRuta = `https://www.google.com/maps/dir/?api=1&origin=${this.latitud},${this.longitud}`;
+    const urlUbicacion = `https://www.google.com/maps/search/?api=1&query=${this.latitud},${this.longitud}`;
+    await this.gpsService.guardarEnArchivo('ubicacion_gps.txt', urlUbicacion);
+  }
+
+  // 2. Ver Ruta Completa (Origen GPS Actual + Destino Predefinido)
+  async abrirRutaCompleta() {
+    if (this.latitud === 'No obtenida aún') {
+      await this.obtenerUbicacionActual();
+    }
+    const urlRuta = `https://www.google.com/maps/dir/?api=1&origin=${this.latitud},${this.longitud}&destination=${this.destinoLat},${this.destinoLng}`;
     window.open(urlRuta, '_blank');
   }
 
-  // 3. Guarda la ubicación actual en TXT
-  async guardarUbicacionTxt() {
-    const contenidoTxt = `=== MI UBICACIÓN GPS ACTUAL ===\nLatitud: ${this.latitud}\nLongitud: ${this.longitud}\nGoogle Maps: https://www.google.com/maps/@${this.latitud},${this.longitud}`;
-    await this.gpsService.guardarEnArchivo('ubicacion_gps.txt', contenidoTxt);
-  }
-
-  // 4. Guarda la ruta en TXT
+  // 4. Guardar Ruta Completa en TXT
   async guardarRutaTxt() {
-    const contenidoTxt = `=== RUTA DESDE MI POSICIÓN ===\nOrigen: ${this.latitud}, ${this.longitud}\nEnlace de origen para ruta: https://www.google.com/maps/dir/?api=1&origin=${this.latitud},${this.longitud}`;
-    await this.gpsService.guardarEnArchivo('ruta_gps.txt', contenidoTxt);
+    if (this.latitud === 'No obtenida aún') {
+      await this.obtenerUbicacionActual();
+    }
+    const urlRuta = `https://www.google.com/maps/dir/?api=1&origin=${this.latitud},${this.longitud}&destination=${this.destinoLat},${this.destinoLng}`;
+    await this.gpsService.guardarEnArchivo('ruta_gps.txt', urlRuta);
   }
 }
