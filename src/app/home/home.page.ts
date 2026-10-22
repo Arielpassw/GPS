@@ -81,6 +81,7 @@ export class HomePage {
     this.obtenerUbicacionActual();
   }
 
+  // cambiar tema 
   modoOscuro = localStorage.getItem('tema-gps') === 'oscuro';
 
   cambiarTema() {
@@ -90,98 +91,100 @@ export class HomePage {
       'tema-gps',
       this.modoOscuro ? 'oscuro' : 'claro'
     );
-  }
+
+    console.log('Modo oscuro:', this.modoOscuro);
+}
 
   async obtenerUbicacionActual() {
-    try {
-      const pos = await this.gpsService.obtenerPosicionActual();
+  try {
+    const pos = await this.gpsService.obtenerPosicionActual();
 
-      this.latitud = pos.lat;
-      this.longitud = pos.lng;
-    } catch (error) {
-      console.error('Error al obtener la ubicación:', error);
-    }
+    this.latitud = pos.lat;
+    this.longitud = pos.lng;
+  } catch (error) {
+    console.error('Error al obtener la ubicación:', error);
   }
+}
 
   // Abrir ubicación actual en Google Maps
   async abrirMapaUbicacion() {
-    if (this.latitud === 'No obtenida aún') {
-      await this.obtenerUbicacionActual();
-    }
-
-    if (
-      this.latitud === 'No obtenida aún' ||
-      this.longitud === 'No obtenida aún'
-    ) {
-      return;
-    }
-
-    const urlUbicacion =
-      `https://www.google.com/maps/search/?api=1&query=${this.latitud},${this.longitud}`;
-
-    window.open(urlUbicacion, '_blank');
+  if (this.latitud === 'No obtenida aún') {
+    await this.obtenerUbicacionActual();
   }
+
+  if (
+    this.latitud === 'No obtenida aún' ||
+    this.longitud === 'No obtenida aún'
+  ) {
+    return;
+  }
+
+  const urlUbicacion =
+    `https://www.google.com/maps/search/?api=1&query=${this.latitud},${this.longitud}`;
+
+  window.open(urlUbicacion, '_blank');
+}
 
   // Guardar ubicación en TXT
   async guardarUbicacionTxt() {
-    if (this.latitud === 'No obtenida aún') {
-      await this.obtenerUbicacionActual();
-    }
-
-    if (
-      this.latitud === 'No obtenida aún' ||
-      this.longitud === 'No obtenida aún'
-    ) {
-      return;
-    }
-
-    const urlUbicacion =
-      `https://www.google.com/maps/search/?api=1&query=${this.latitud},${this.longitud}`;
-
-    await this.gpsService.guardarEnArchivo(
-      'ubicacion_gps.txt',
-      urlUbicacion
-    );
+  if (this.latitud === 'No obtenida aún') {
+    await this.obtenerUbicacionActual();
   }
+
+  if (
+    this.latitud === 'No obtenida aún' ||
+    this.longitud === 'No obtenida aún'
+  ) {
+    return;
+  }
+
+  const urlUbicacion =
+    `https://www.google.com/maps/search/?api=1&query=${this.latitud},${this.longitud}`;
+
+  await this.gpsService.guardarEnArchivo(
+    'ubicacion_gps.txt',
+    urlUbicacion
+  );
+}
 
   // Abrir ruta desde la ubicación actual hasta el destino
   async abrirRutaCompleta() {
-    if (this.latitud === 'No obtenida aún') {
-      await this.obtenerUbicacionActual();
-    }
-
-    if (
-      this.latitud === 'No obtenida aún' ||
-      this.longitud === 'No obtenida aún'
-    ) {
-      return;
-    }
-
-    const urlRuta =
-      `https://www.google.com/maps/dir/?api=1&origin=${this.latitud},${this.longitud}&destination=${this.destinoLat},${this.destinoLng}`;
-
-    window.open(urlRuta, '_blank');
+  if (this.latitud === 'No obtenida aún') {
+    await this.obtenerUbicacionActual();
   }
+
+  if (
+    this.latitud === 'No obtenida aún' ||
+    this.longitud === 'No obtenida aún'
+  ) {
+    return;
+  }
+
+  const urlRuta =
+    `https://www.google.com/maps/dir/?api=1&origin=${this.latitud},${this.longitud}&destination=${this.destinoLat},${this.destinoLng}`;
+
+  window.open(urlRuta, '_blank');
+}
 
   // Guardar ruta completa en TXT
   async guardarRutaTxt() {
-    if (this.latitud === 'No obtenida aún') {
-      await this.obtenerUbicacionActual();
-    }
-
-    if (
-      this.latitud === 'No obtenida aún' ||
-      this.longitud === 'No obtenida aún'
-    ) {
-      return;
-    }
-
-    const urlRuta =
-      `https://www.google.com/maps/dir/?api=1&origin=${this.latitud},${this.longitud}&destination=${this.destinoLat},${this.destinoLng}`;
-
-    await this.gpsService.guardarEnArchivo(
-      'ruta_gps.txt',
-      urlRuta
-    );
+  if (this.latitud === 'No obtenida aún') {
+    await this.obtenerUbicacionActual();
   }
+
+  if (
+    this.latitud === 'No obtenida aún' ||
+    this.longitud === 'No obtenida aún'
+  ) {
+    return;
+  }
+
+  const urlRuta =
+    `https://www.google.com/maps/dir/?api=1&origin=${this.latitud},${this.longitud}&destination=${this.destinoLat},${this.destinoLng}`;
+
+  await this.gpsService.guardarEnArchivo(
+    'ruta_gps.txt',
+    urlRuta
+  );
+}
 }

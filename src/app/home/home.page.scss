@@ -506,38 +506,42 @@ ion-card {
 }
 
 /* Encabezado oscuro */
-.gps-header.dark-theme ion-toolbar {
+.gps-header.modo-oscuro ion-toolbar {
   --background: #191526;
   --color: #f6f1ff;
 }
 
-.gps-header.dark-theme .toolbar-text span {
+.gps-header.modo-oscuro .toolbar-text ion-title {
+  color: #f6f1ff;
+}
+
+.gps-header.modo-oscuro .toolbar-text span {
   color: #b5acc9;
 }
 
-.gps-header.dark-theme .theme-toggle {
+.gps-header.modo-oscuro .theme-toggle {
   --color: #f5ca69;
 }
 
 /* Fondo general */
-ion-content.gps-content.dark-theme {
+ion-content.gps-content.modo-oscuro {
   --background: #13111c;
   --color: #f4efff;
 }
 
 /* Textos principales */
-.dark-theme .welcome-section h1,
-.dark-theme .section-heading h2 {
+.modo-oscuro .welcome-section h1,
+.modo-oscuro .section-heading h2 {
   color: #f4efff;
 }
 
-.dark-theme .welcome-section p,
-.dark-theme .section-heading p {
+.modo-oscuro .welcome-section p,
+.modo-oscuro .section-heading p {
   color: #b4abc7;
 }
 
 /* Tarjetas */
-.dark-theme ion-card {
+.modo-oscuro ion-card {
   --background: #201c2d;
   background: #201c2d;
   border-color: #342c48;
@@ -545,86 +549,86 @@ ion-content.gps-content.dark-theme {
 }
 
 /* Tarjeta de coordenadas */
-.dark-theme .location-heading h2,
-.dark-theme .coordinate-row strong,
-.dark-theme .action-info h3,
-.dark-theme .route-card h3,
-.dark-theme .save-card h3 {
+.modo-oscuro .location-heading h2,
+.modo-oscuro .coordinate-row strong,
+.modo-oscuro .action-info h3,
+.modo-oscuro .route-card h3,
+.modo-oscuro .save-card h3 {
   color: #f1eaff;
 }
 
-.dark-theme .location-heading p,
-.dark-theme .coordinate-label,
-.dark-theme .location-hint,
-.dark-theme .action-info p,
-.dark-theme .route-card>ion-card-content>p,
-.dark-theme .save-card p {
+.modo-oscuro .location-heading p,
+.modo-oscuro .coordinate-label,
+.modo-oscuro .location-hint,
+.modo-oscuro .action-info p,
+.modo-oscuro .route-card>ion-card-content>p,
+.modo-oscuro .save-card p {
   color: #b5abc9;
 }
 
-.dark-theme .location-icon {
+.modo-oscuro .location-icon {
   background: #35294f;
   color: #c1a8ff;
 }
 
-.dark-theme .coordinates-box {
+.modo-oscuro .coordinates-box {
   background: #191625;
   border-color: #393047;
 }
 
-.dark-theme .coordinate-divider {
+.modo-oscuro .coordinate-divider {
   background: #393047;
 }
 
-.dark-theme .status-dot {
+.modo-oscuro .status-dot {
   background: #71687e;
 }
 
-.dark-theme .status-active {
+.modo-oscuro .status-active {
   background: #31bd85;
   box-shadow: 0 0 0 4px #263d36;
 }
 
 /* Acciones y ruta */
-.dark-theme .map-icon {
+.modo-oscuro .map-icon {
   background: #233447;
   color: #8dc6ff;
 }
 
-.dark-theme .route-card {
+.modo-oscuro .route-card {
   background: linear-gradient(145deg, #201c2d, #29213c);
 }
 
-.dark-theme .destination-info {
+.modo-oscuro .destination-info {
   background: #191625;
   border-color: #393047;
 }
 
-.dark-theme .destination-info span {
+.modo-oscuro .destination-info span {
   color: #b5abc9;
 }
 
-.dark-theme .destination-info strong {
+.modo-oscuro .destination-info strong {
   color: #e6dcff;
 }
 
-.dark-theme .route-illustration {
+.modo-oscuro .route-illustration {
   background: #35294f;
   color: #c1a8ff;
 }
 
 /* Guardado de archivos */
-.dark-theme .location-save {
+.modo-oscuro .location-save {
   background: #35294f;
   color: #c1a8ff;
 }
 
-.dark-theme .route-save {
+.modo-oscuro .route-save {
   background: #203c35;
   color: #75e0b7;
 }
 
-.dark-theme .save-button {
+.modo-oscuro .save-button {
   --background: #35294f;
   --background-hover: #463561;
   --background-activated: #463561;
@@ -632,6 +636,6 @@ ion-content.gps-content.dark-theme {
 }
 
 /* Pie de página */
-.dark-theme .app-footer {
+.modo-oscuro .app-footer {
   color: #a99dbd;
 }
