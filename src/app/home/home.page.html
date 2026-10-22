@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Mi Ubicación GPS (Standalone)</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- 1. Sección para ver Ubicación Actual y Coordenadas -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Coordenadas actuales</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Latitud:</strong> {{ latitud }}</p>
+      <p><strong>Longitud:</strong> {{ longitud }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Botón para obtener / actualizar la ubicación -->
+  <ion-button expand="block" color="primary" (click)="obtenerUbicacionActual()">
+    OBTENER UBICACIÓN ACTUAL
+  </ion-button>
+
+  <!-- Botón 1: Abrir la ubicación en Google Maps -->
+  <ion-button expand="block" color="tertiary" (click)="abrirMapaUbicacion()" class="ion-margin-top">
+    Ver mi ubicación en Google Maps
+  </ion-button>
+
+  <hr class="ion-margin-vertical">
+
+  <!-- 2. Sección para Ruta (Origen en tu posición para escoger destino) -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Ruta desde mi posición</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Abre Google Maps usando tu posición actual como punto de partida para que elijas tu destino.</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="block" color="secondary" (click)="abrirRutaParaEscogerDestino()">
+    Elegir Ruta (Abrir Google Maps)
+  </ion-button>
+
+  <!-- 3 y 4. Botones para guardar en TXT -->
+  <ion-button expand="block" color="warning" (click)="guardarUbicacionTxt()" class="ion-margin-top">
+    Guardar Ubicación en TXT
+  </ion-button>
+
+  <ion-button expand="block" color="success" (click)="guardarRutaTxt()">
+    Guardar Ruta en TXT
+  </ion-button>
+
+</ion-content>
