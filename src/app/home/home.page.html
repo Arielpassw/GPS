@@ -1,55 +1,201 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Mi Ubicación GPS (Standalone)</ion-title>
+<ion-header class="gps-header"
+  [class.modo-oscuro]="modoOscuro"
+  [fullscreen]="true">
+  <ion-toolbar>
+    <div class="toolbar-content">
+      <div class="logo-icon">
+        <ion-icon name="navigate-outline"></ion-icon>
+      </div>
+      <div class="toolbar-text">
+        <ion-title>GeoTrack</ion-title>
+        <span>Tu ubicación, siempre contigo</span>
+      </div>
+
+      <ion-button fill="clear" class="theme-toggle" (click)="cambiarTema()"
+        [attr.aria-label]="modoOscuro ? 'Activar modo claro' : 'Activar modo oscuro'">
+
+        <ion-icon [name]="modoOscuro ? 'sunny-outline' : 'moon-outline'" slot="icon-only">
+        </ion-icon>
+
+      </ion-button>
+
+    </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="gps-content" [fullscreen]="true">
 
-  <!-- 1. Sección para ver Ubicación Actual y Coordenadas -->
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Coordenadas actuales</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <p><strong>Latitud:</strong> {{ latitud }}</p>
-      <p><strong>Longitud:</strong> {{ longitud }}</p>
-    </ion-card-content>
-  </ion-card>
+  <div class="page-container">
 
-  <!-- Botón para obtener / actualizar la ubicación -->
-  <ion-button expand="block" color="primary" (click)="obtenerUbicacionActual()">
-    OBTENER UBICACIÓN ACTUAL
-  </ion-button>
+    <!-- Bienvenida -->
+    <section class="welcome-section">
+      <span class="eyebrow">LOCALIZACIÓN GPS</span>
+      <h1>¡Hola! </h1>
+      <p>Encuentra tu ubicación y descubre cómo llegar a tu destino.</p>
+    </section>
 
-  <!-- Botón 1: Abrir la ubicación en Google Maps -->
-  <ion-button expand="block" color="tertiary" (click)="abrirMapaUbicacion()" class="ion-margin-top">
-    Ver mi ubicación en Google Maps
-  </ion-button>
+    <!-- Tarjeta de coordenadas -->
+    <ion-card class="location-card">
+      <ion-card-content>
 
-  <hr class="ion-margin-vertical">
+        <div class="location-card-header">
+          <div class="location-icon">
+            <ion-icon name="location-outline"></ion-icon>
+          </div>
 
-  <!-- 2. Sección para Ruta Completa (Origen GPS Actual + Destino Predefinido) -->
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Ruta Completa</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <p>Muestra el trayecto desde tu ubicación actual hacia el destino predefinido.</p>
-    </ion-card-content>
-  </ion-card>
+          <div class="location-heading">
+            <h2>Mi ubicación</h2>
+            <p>Coordenadas geográficas</p>
+          </div>
 
-  <ion-button expand="block" color="secondary" (click)="abrirRutaCompleta()">
-    Ver Ruta Completa en Google Maps
-  </ion-button>
+          <div class="status-dot" [class.status-active]="latitud !== 'No obtenida aún'">
+          </div>
+        </div>
 
-  <!-- 3 y 4. Botones para guardar en TXT -->
-  <ion-button expand="block" color="warning" (click)="guardarUbicacionTxt()" class="ion-margin-top">
-    Guardar Ubicación en TXT
-  </ion-button>
+        <div class="coordinates-box">
+          <div class="coordinate-row">
+            <div class="coordinate-label">
+              <ion-icon name="navigate-outline"></ion-icon>
+              <span>Latitud</span>
+            </div>
+            <strong>{{ latitud }}</strong>
+          </div>
 
-  <ion-button expand="block" color="success" (click)="guardarRutaTxt()">
-    Guardar Ruta en TXT
-  </ion-button>
+          <div class="coordinate-divider"></div>
+
+          <div class="coordinate-row">
+            <div class="coordinate-label">
+              <ion-icon name="earth-outline"></ion-icon>
+              <span>Longitud</span>
+            </div>
+            <strong>{{ longitud }}</strong>
+          </div>
+        </div>
+
+        <p class="location-hint">
+          <ion-icon name="information-circle-outline"></ion-icon>
+          Activa el GPS y obtén tu posición actual.
+        </p>
+
+        <ion-button expand="block" class="main-button" (click)="obtenerUbicacionActual()">
+          <ion-icon name="locate-outline" slot="start"></ion-icon>
+          Obtener ubicación
+        </ion-button>
+
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Acciones de ubicación -->
+    <section class="section-heading">
+      <div>
+        <h2>Explorar ubicación</h2>
+        <p>Consulta tu posición en el mapa.</p>
+      </div>
+    </section>
+
+    <ion-card class="action-card">
+      <ion-card-content>
+        <div class="action-icon map-icon">
+          <ion-icon name="map-outline"></ion-icon>
+        </div>
+
+        <div class="action-info">
+          <h3>Ver en Google Maps</h3>
+          <p>Visualiza dónde te encuentras.</p>
+        </div>
+
+        <ion-button fill="clear" class="arrow-button" aria-label="Ver ubicación en Google Maps"
+          (click)="abrirMapaUbicacion()">
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Ruta -->
+    <section class="section-heading">
+      <div>
+        <h2>Planificar recorrido</h2>
+        <p>Consulta la ruta hasta tu destino.</p>
+      </div>
+    </section>
+
+    <ion-card class="route-card">
+      <ion-card-content>
+        <div class="route-illustration">
+          <ion-icon name="git-branch-outline"></ion-icon>
+        </div>
+
+        <h3>Tu próxima aventura</h3>
+        <p>
+          Explora el trayecto desde tu posición actual
+          hasta el destino configurado.
+        </p>
+
+        <div class="destination-info">
+          <ion-icon name="flag-outline"></ion-icon>
+          <div>
+            <span>Destino configurado</span>
+            <strong>{{ destinoLat }}, {{ destinoLng }}</strong>
+          </div>
+        </div>
+
+        <ion-button expand="block" class="route-button" (click)="abrirRutaCompleta()">
+          <ion-icon name="navigate-outline" slot="start"></ion-icon>
+          Ver ruta completa
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Guardar archivos -->
+    <section class="section-heading">
+      <div>
+        <h2>Guardar información</h2>
+        <p>Conserva los enlaces de tu ubicación y ruta.</p>
+      </div>
+    </section>
+
+    <div class="save-grid">
+
+      <ion-card class="save-card">
+        <ion-card-content>
+          <div class="save-icon location-save">
+            <ion-icon name="document-text-outline"></ion-icon>
+          </div>
+
+          <h3>Mi ubicación</h3>
+          <p>Archivo TXT con el enlace del mapa.</p>
+
+          <ion-button expand="block" class="save-button" (click)="guardarUbicacionTxt()">
+            <ion-icon name="download-outline" slot="start"></ion-icon>
+            Guardar TXT
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="save-card">
+        <ion-card-content>
+          <div class="save-icon route-save">
+            <ion-icon name="document-text-outline"></ion-icon>
+          </div>
+
+          <h3>Mi ruta</h3>
+          <p>Archivo TXT con el enlace del recorrido.</p>
+
+          <ion-button expand="block" class="save-button" (click)="guardarRutaTxt()">
+            <ion-icon name="download-outline" slot="start"></ion-icon>
+            Guardar TXT
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+
+    </div>
+
+    <!-- Pie -->
+    <footer class="app-footer">
+      <ion-icon name="navigate-circle-outline"></ion-icon>
+      <span>GeoTrack · Tu mundo a un toque</span>
+    </footer>
+
+  </div>
 
 </ion-content>

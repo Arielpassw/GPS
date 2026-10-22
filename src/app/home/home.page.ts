@@ -1,16 +1,37 @@
+
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { 
-  IonHeader, 
-  IonToolbar, 
-  IonTitle, 
-  IonContent, 
-  IonCard, 
-  IonCardHeader, 
-  IonCardTitle, 
-  IonCardContent, 
-  IonButton 
+
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonCard,
+  IonCardContent,
+  IonButton,
+  IonIcon
 } from '@ionic/angular';
+
+import { addIcons } from 'ionicons';
+
+import {
+  navigateOutline,
+  locationOutline,
+  earthOutline,
+  informationCircleOutline,
+  locateOutline,
+  mapOutline,
+  chevronForwardOutline,
+  gitBranchOutline,
+  flagOutline,
+  documentTextOutline,
+  downloadOutline,
+  navigateCircleOutline,
+  sunnyOutline,
+  moonOutline
+} from 'ionicons/icons';
+
 import { GpsService } from '../services/gps';
 
 @Component({
@@ -25,10 +46,9 @@ import { GpsService } from '../services/gps';
     IonTitle,
     IonContent,
     IonCard,
-    IonCardHeader,
-    IonCardTitle,
     IonCardContent,
-    IonButton
+    IonButton,
+    IonIcon
   ]
 })
 export class HomePage {
@@ -36,53 +56,132 @@ export class HomePage {
   latitud: number | string = 'No obtenida aún';
   longitud: number | string = 'No obtenida aún';
 
-  // Destino predefinido (puedes cambiarlo por el de tu casa, un parque o la universidad)
+  // Destino predefinido
   destinoLat = -0.208206;
   destinoLng = -78.490448;
 
   constructor(private gpsService: GpsService) {
+    addIcons({
+      navigateOutline,
+      locationOutline,
+      earthOutline,
+      informationCircleOutline,
+      locateOutline,
+      mapOutline,
+      chevronForwardOutline,
+      gitBranchOutline,
+      flagOutline,
+      documentTextOutline,
+      downloadOutline,
+      navigateCircleOutline,
+      sunnyOutline,
+      moonOutline
+    });
+
     this.obtenerUbicacionActual();
   }
 
-  async obtenerUbicacionActual() {
-    const pos = await this.gpsService.obtenerPosicionActual();
-    this.latitud = pos.lat;
-    this.longitud = pos.lng;
+  modoOscuro = localStorage.getItem('tema-gps') === 'oscuro';
+
+  cambiarTema() {
+    this.modoOscuro = !this.modoOscuro;
+
+    localStorage.setItem(
+      'tema-gps',
+      this.modoOscuro ? 'oscuro' : 'claro'
+    );
   }
 
-  // 1. Ver Ubicación Actual en Google Maps
+  async obtenerUbicacionActual() {
+    try {
+      const pos = await this.gpsService.obtenerPosicionActual();
+
+      this.latitud = pos.lat;
+      this.longitud = pos.lng;
+    } catch (error) {
+      console.error('Error al obtener la ubicación:', error);
+    }
+  }
+
+  // Abrir ubicación actual en Google Maps
   async abrirMapaUbicacion() {
     if (this.latitud === 'No obtenida aún') {
       await this.obtenerUbicacionActual();
     }
-    const urlUbicacion = `https://www.google.com/maps/search/?api=1&query=${this.latitud},${this.longitud}`;
+
+    if (
+      this.latitud === 'No obtenida aún' ||
+      this.longitud === 'No obtenida aún'
+    ) {
+      return;
+    }
+
+    const urlUbicacion =
+      `https://www.google.com/maps/search/?api=1&query=${this.latitud},${this.longitud}`;
+
     window.open(urlUbicacion, '_blank');
   }
 
-  // 3. Guardar Ubicación Actual en TXT
+  // Guardar ubicación en TXT
   async guardarUbicacionTxt() {
     if (this.latitud === 'No obtenida aún') {
       await this.obtenerUbicacionActual();
     }
-    const urlUbicacion = `https://www.google.com/maps/search/?api=1&query=${this.latitud},${this.longitud}`;
-    await this.gpsService.guardarEnArchivo('ubicacion_gps.txt', urlUbicacion);
+
+    if (
+      this.latitud === 'No obtenida aún' ||
+      this.longitud === 'No obtenida aún'
+    ) {
+      return;
+    }
+
+    const urlUbicacion =
+      `https://www.google.com/maps/search/?api=1&query=${this.latitud},${this.longitud}`;
+
+    await this.gpsService.guardarEnArchivo(
+      'ubicacion_gps.txt',
+      urlUbicacion
+    );
   }
 
-  // 2. Ver Ruta Completa (Origen GPS Actual + Destino Predefinido)
+  // Abrir ruta desde la ubicación actual hasta el destino
   async abrirRutaCompleta() {
     if (this.latitud === 'No obtenida aún') {
       await this.obtenerUbicacionActual();
     }
-    const urlRuta = `https://www.google.com/maps/dir/?api=1&origin=${this.latitud},${this.longitud}&destination=${this.destinoLat},${this.destinoLng}`;
+
+    if (
+      this.latitud === 'No obtenida aún' ||
+      this.longitud === 'No obtenida aún'
+    ) {
+      return;
+    }
+
+    const urlRuta =
+      `https://www.google.com/maps/dir/?api=1&origin=${this.latitud},${this.longitud}&destination=${this.destinoLat},${this.destinoLng}`;
+
     window.open(urlRuta, '_blank');
   }
 
-  // 4. Guardar Ruta Completa en TXT
+  // Guardar ruta completa en TXT
   async guardarRutaTxt() {
     if (this.latitud === 'No obtenida aún') {
       await this.obtenerUbicacionActual();
     }
-    const urlRuta = `https://www.google.com/maps/dir/?api=1&origin=${this.latitud},${this.longitud}&destination=${this.destinoLat},${this.destinoLng}`;
-    await this.gpsService.guardarEnArchivo('ruta_gps.txt', urlRuta);
+
+    if (
+      this.latitud === 'No obtenida aún' ||
+      this.longitud === 'No obtenida aún'
+    ) {
+      return;
+    }
+
+    const urlRuta =
+      `https://www.google.com/maps/dir/?api=1&origin=${this.latitud},${this.longitud}&destination=${this.destinoLat},${this.destinoLng}`;
+
+    await this.gpsService.guardarEnArchivo(
+      'ruta_gps.txt',
+      urlRuta
+    );
   }
 }

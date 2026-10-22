@@ -1,27 +1,637 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+ion-header {
+  box-shadow: none;
 }
 
-#container strong {
+.gps-header ion-toolbar {
+  --background: #ffffff;
+  --color: #302052;
+  --min-height: 82px;
+  padding: 8px 16px;
+}
+
+.toolbar-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #7652df, #a88af7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+}
+
+.logo-icon ion-icon {
+  font-size: 25px;
+}
+
+.toolbar-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.toolbar-text ion-title {
+  position: static;
+  padding: 0;
   font-size: 20px;
-  line-height: 26px;
+  font-weight: 800;
+  text-align: left;
+  letter-spacing: -0.4px;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
+.toolbar-text span {
+  color: #89839a;
+  font-size: 12px;
+}
 
-  color: #8c8c8c;
+.gps-content {
+  --background: #f7f5fc;
+}
 
+.page-container {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 20px 16px 30px;
+}
+
+.welcome-section {
+  margin: 8px 2px 22px;
+}
+
+.eyebrow {
+  color: #7954d9;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.welcome-section h1 {
+  margin: 9px 0;
+  color: #302052;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+}
+
+.welcome-section p {
+  max-width: 390px;
+  margin: 0;
+  color: #817a91;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+ion-card {
+  margin: 0;
+  border-radius: 22px;
+  box-shadow: 0 7px 25px rgba(54, 35, 91, 0.055);
+}
+
+.location-card {
+  background: #ffffff;
+  border: 1px solid #eee8fb;
+  margin-bottom: 30px;
+}
+
+.location-card ion-card-content {
+  padding: 20px;
+}
+
+.location-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.location-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: #f0eaff;
+  color: #7652df;
+  flex-shrink: 0;
+}
+
+.location-icon ion-icon {
+  font-size: 25px;
+}
+
+.location-heading {
+  flex: 1;
+}
+
+.location-heading h2 {
+  margin: 0 0 5px;
+  color: #302052;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.location-heading p {
+  margin: 0;
+  color: #9189a1;
+  font-size: 12px;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #d7d2df;
+  flex-shrink: 0;
+}
+
+.status-active {
+  background: #31bd85;
+  box-shadow: 0 0 0 4px #e4f8ef;
+}
+
+.coordinates-box {
+  padding: 5px 14px;
+  background: #f8f6fd;
+  border: 1px solid #f0ebf9;
+  border-radius: 16px;
+}
+
+.coordinate-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 0;
+}
+
+.coordinate-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #817895;
+  font-size: 12px;
+}
+
+.coordinate-label ion-icon {
+  color: #8b6ae5;
+  font-size: 17px;
+}
+
+.coordinate-row strong {
+  color: #38275a;
+  font-size: 15px;
+  font-weight: 750;
+  overflow-wrap: anywhere;
+  font-variant-numeric: tabular-nums;
+}
+
+.coordinate-divider {
+  height: 1px;
+  background: #eae4f5;
+}
+
+.location-hint {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  margin: 16px 0;
+  color: #8a829b;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.location-hint ion-icon {
+  color: #8a6be0;
+  font-size: 17px;
+  flex-shrink: 0;
+}
+
+.main-button,
+.route-button {
+  --background: #7652df;
+  --background-hover: #6340c7;
+  --background-activated: #6340c7;
+  --border-radius: 14px;
+  --box-shadow: none;
+  --color: #ffffff;
+  height: 49px;
+  font-size: 13px;
+  font-weight: 750;
+  letter-spacing: 0.2px;
   margin: 0;
 }
 
-#container a {
-  text-decoration: none;
+.section-heading {
+  margin: 0 2px 13px;
+}
+
+.section-heading h2 {
+  margin: 0 0 5px;
+  color: #302052;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.section-heading p {
+  margin: 0;
+  color: #898198;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.action-card {
+  margin-bottom: 28px;
+  background: #ffffff;
+}
+
+.action-card ion-card-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+}
+
+.action-icon {
+  width: 47px;
+  height: 47px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.action-icon ion-icon {
+  font-size: 24px;
+}
+
+.map-icon {
+  background: #e9f5ff;
+  color: #438bd4;
+}
+
+.action-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.action-info h3 {
+  margin: 0 0 6px;
+  color: #38275a;
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.action-info p {
+  margin: 0;
+  color: #898198;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.arrow-button {
+  --color: #7954d9;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.arrow-button ion-icon {
+  font-size: 21px;
+}
+
+.route-card {
+  margin-bottom: 28px;
+  background: linear-gradient(145deg, #ffffff 55%, #f3edff);
+  border: 1px solid #eee8fb;
+}
+
+.route-card ion-card-content {
+  padding: 21px;
+}
+
+.route-illustration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  margin-bottom: 16px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #e7dcff, #f5eaff);
+  color: #7954d9;
+}
+
+.route-illustration ion-icon {
+  font-size: 29px;
+}
+
+.route-card h3 {
+  margin: 0 0 9px;
+  color: #302052;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.route-card>ion-card-content>p {
+  margin: 0 0 18px;
+  color: #817a91;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.destination-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 13px;
+  margin-bottom: 18px;
+  border: 1px solid #eae2fb;
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.destination-info>ion-icon {
+  color: #7954d9;
+  font-size: 21px;
+  flex-shrink: 0;
+}
+
+.destination-info div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.destination-info span {
+  color: #8b829c;
+  font-size: 11px;
+}
+
+.destination-info strong {
+  color: #453267;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.save-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.save-card {
+  min-width: 0;
+  background: #ffffff;
+}
+
+.save-card ion-card-content {
+  padding: 14px 12px;
+}
+
+.save-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 14px;
+  border-radius: 14px;
+}
+
+.save-icon ion-icon {
+  font-size: 22px;
+}
+
+.location-save {
+  color: #7652df;
+  background: #eee8ff;
+}
+
+.route-save {
+  color: #169d78;
+  background: #e2f8ef;
+}
+
+.save-card h3 {
+  margin: 0 0 7px;
+  color: #38275a;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.save-card p {
+  min-height: 34px;
+  margin: 0 0 14px;
+  color: #898198;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.save-button {
+  --background: #f0ebfc;
+  --background-hover: #e5dcfa;
+  --background-activated: #e5dcfa;
+  --color: #6947c3;
+  --border-radius: 11px;
+  --box-shadow: none;
+  height: 39px;
+  font-size: 11px;
+  font-weight: 750;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.app-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 27px 0 8px;
+  color: #9a92aa;
+  font-size: 11px;
+}
+
+.app-footer ion-icon {
+  color: #8b6ae5;
+  font-size: 19px;
+}
+
+@media (max-width: 360px) {
+  .page-container {
+    padding-inline: 11px;
+  }
+
+  .location-card ion-card-content {
+    padding: 15px;
+  }
+
+  .coordinate-row strong {
+    font-size: 13px;
+  }
+
+  .save-grid {
+    gap: 8px;
+  }
+
+  .save-card ion-card-content {
+    padding: 11px 9px;
+  }
+
+  .save-button {
+    font-size: 10px;
+  }
+}
+
+
+/* Botón para cambiar el tema */
+.theme-toggle {
+  --color: #7652df;
+  --border-radius: 14px;
+  width: 44px;
+  height: 44px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.theme-toggle ion-icon {
+  font-size: 23px;
+}
+
+/* Encabezado oscuro */
+.gps-header.dark-theme ion-toolbar {
+  --background: #191526;
+  --color: #f6f1ff;
+}
+
+.gps-header.dark-theme .toolbar-text span {
+  color: #b5acc9;
+}
+
+.gps-header.dark-theme .theme-toggle {
+  --color: #f5ca69;
+}
+
+/* Fondo general */
+ion-content.gps-content.dark-theme {
+  --background: #13111c;
+  --color: #f4efff;
+}
+
+/* Textos principales */
+.dark-theme .welcome-section h1,
+.dark-theme .section-heading h2 {
+  color: #f4efff;
+}
+
+.dark-theme .welcome-section p,
+.dark-theme .section-heading p {
+  color: #b4abc7;
+}
+
+/* Tarjetas */
+.dark-theme ion-card {
+  --background: #201c2d;
+  background: #201c2d;
+  border-color: #342c48;
+  box-shadow: 0 7px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Tarjeta de coordenadas */
+.dark-theme .location-heading h2,
+.dark-theme .coordinate-row strong,
+.dark-theme .action-info h3,
+.dark-theme .route-card h3,
+.dark-theme .save-card h3 {
+  color: #f1eaff;
+}
+
+.dark-theme .location-heading p,
+.dark-theme .coordinate-label,
+.dark-theme .location-hint,
+.dark-theme .action-info p,
+.dark-theme .route-card>ion-card-content>p,
+.dark-theme .save-card p {
+  color: #b5abc9;
+}
+
+.dark-theme .location-icon {
+  background: #35294f;
+  color: #c1a8ff;
+}
+
+.dark-theme .coordinates-box {
+  background: #191625;
+  border-color: #393047;
+}
+
+.dark-theme .coordinate-divider {
+  background: #393047;
+}
+
+.dark-theme .status-dot {
+  background: #71687e;
+}
+
+.dark-theme .status-active {
+  background: #31bd85;
+  box-shadow: 0 0 0 4px #263d36;
+}
+
+/* Acciones y ruta */
+.dark-theme .map-icon {
+  background: #233447;
+  color: #8dc6ff;
+}
+
+.dark-theme .route-card {
+  background: linear-gradient(145deg, #201c2d, #29213c);
+}
+
+.dark-theme .destination-info {
+  background: #191625;
+  border-color: #393047;
+}
+
+.dark-theme .destination-info span {
+  color: #b5abc9;
+}
+
+.dark-theme .destination-info strong {
+  color: #e6dcff;
+}
+
+.dark-theme .route-illustration {
+  background: #35294f;
+  color: #c1a8ff;
+}
+
+/* Guardado de archivos */
+.dark-theme .location-save {
+  background: #35294f;
+  color: #c1a8ff;
+}
+
+.dark-theme .route-save {
+  background: #203c35;
+  color: #75e0b7;
+}
+
+.dark-theme .save-button {
+  --background: #35294f;
+  --background-hover: #463561;
+  --background-activated: #463561;
+  --color: #e4d8ff;
+}
+
+/* Pie de página */
+.dark-theme .app-footer {
+  color: #a99dbd;
 }
