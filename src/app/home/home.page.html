@@ -9,6 +9,13 @@
         <ion-title>GeoTrack</ion-title>
         <span>Tu ubicación, siempre contigo</span>
       </div>
+      <ion-button fill="clear" class="theme-toggle" (click)="cambiarTema()"
+        [attr.aria-label]="modoOscuro ? 'Activar modo claro' : 'Activar modo oscuro'">
+
+        <ion-icon [name]="modoOscuro ? 'sunny-outline' : 'moon-outline'" slot="icon-only">
+        </ion-icon>
+
+      </ion-button>
 
     </div>
   </ion-toolbar>
@@ -16,14 +23,8 @@
 
 <ion-content class="gps-content" [class.modo-oscuro]="modoOscuro" [fullscreen]="true">
 
-  <ion-button fill="clear" class="theme-toggle" (click)="cambiarTema()"
-    [attr.aria-label]="modoOscuro ? 'Activar modo claro' : 'Activar modo oscuro'">
 
-    <ion-icon [name]="modoOscuro ? 'sunny-outline' : 'moon-outline'" slot="icon-only">
-    </ion-icon>
 
-  </ion-button>
-  
   <div class="page-container">
 
     <!-- Bienvenida -->
